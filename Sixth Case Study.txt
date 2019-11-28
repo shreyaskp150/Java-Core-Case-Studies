@@ -1,0 +1,151 @@
+Main1.java
+
+package face;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class Main1 
+{
+	static int ID=0;
+	public static void main(String[] args) throws IOException 
+	{
+		String i;
+		String name;
+		String address;
+		String contact;
+		String email;
+		String proofType;
+		String proofID;
+		String g;
+		String[] x=new String[25];
+		String[] y=new String[25];
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		//Customer C=new Customer();
+		Main2 m=new Main2();
+		do
+		{
+    	   System.out.println("Enter Your Details:");
+    	   System.out.println("Enter Your Name: ");
+    	   name=in.readLine();
+    	   System.out.println("Enter Your Address: ");
+    	   address=in.readLine();
+    	   System.out.println("Enter Your Contact number: ");
+    	   contact=in.readLine();
+    	   System.out.println("Enter Your Email id: ");
+    	   email=in.readLine();
+    	   System.out.println("Enter Your ProofType: ");
+    	   proofType=in.readLine();
+    	   System.out.println("Enter Your ProofID: ");
+    	   proofID=in.readLine();
+    	   g=proofID;
+    	   m.Registeration(name,address,contact,email,proofType,proofID);
+    	   System.out.println(" Your Proof ID is "+ ++ID);
+    	   for(int o=0;o<25;o++)
+    	   {
+    		   if(ID==o)
+    		   {
+    			   x[o]=name;
+    		   }
+    	   }
+    	   for(int o=0;o<25;o++)
+    	   {
+    		   if(ID==o)
+    		   {
+    			   String aID=Integer.toString(ID);
+    			   y[o]=aID;
+    		   }
+    	   }
+    	   System.out.println("Do you want to continue registration?(yes/no)");
+    	   i=in.readLine();
+		}while(i.equals("yes"));
+		System.out.println("Customers list");
+		System.out.println("The registered customers are:");
+		System.out.println("Customer ID  Customer name");
+		for(int o=1;o<=ID;o++)
+		{
+			System.out.println(x[o]+"          "+y[o]);
+		}
+		System.out.println("Thank you.");
+	}   		
+}
+
+Main2.java
+
+package face;
+public class Main2
+{
+	String name;
+	String address;
+	String contact;
+	String email;
+	String proofType;
+	String proofID;
+	public void Registeration(String name,String address,String contact,String email,String proofType,String proofID)
+	{
+		this.name=name;
+		this.address=address;
+		this.contact=contact;
+		this.email=email;
+		this.proofType=proofType;
+		this.proofID=proofID;		
+		System.out.println("Name            :"+name);
+		System.out.println("Address         :"+address);
+		System.out.println("Contact Number  :"+contact);
+		System.out.println("Email ID        :"+email);
+		System.out.println("Proof Type      :"+proofType);
+		System.out.println("Proof ID        :"+proofID);
+	}
+}
+
+Output:
+
+Enter Your Details:
+Enter Your Name: 
+Shreyas K P
+Enter Your Address: 
+Kollam
+Enter Your Contact number: 
+8105775400
+Enter Your Email id: 
+kpshreyas1@gmail.com
+Enter Your ProofType: 
+Aadhaar
+Enter Your ProofID: 
+3636363684838
+Name            :Shreyas K P
+Address         :Kollam
+Contact Number  :8105775400
+Email ID        :kpshreyas1@gmail.com
+Proof Type      :Aadhaar
+Proof ID        :3636363684838
+ Your Proof ID is 1
+Do you want to continue registration?(yes/no)
+yes
+Enter Your Details:
+Enter Your Name: 
+Vaishnavi
+Enter Your Address: 
+Kollam
+Enter Your Contact number: 
+89837236447
+Enter Your Email id: 
+vaishnavi.dharan@faceacademy.in
+Enter Your ProofType: 
+Voter id
+Enter Your ProofID: 
+732827423
+Name            :Vaishnavi
+Address         :Kollam
+Contact Number  :89837236447
+Email ID        :vaishnavi.dharan@faceacademy.in
+Proof Type      :Voter id
+Proof ID        :732827423
+ Your Proof ID is 2
+Do you want to continue registration?(yes/no)
+no
+Customers list
+The registered customers are:
+Customer ID  Customer name
+Shreyas K P          1
+Vaishnavi          2
+Thank you.

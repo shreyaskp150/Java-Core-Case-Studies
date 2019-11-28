@@ -1,0 +1,317 @@
+Bookoings.java
+
+package face;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class Bookings 
+{
+	static int room=0,croom=0;
+	String ac;
+	String cot;
+	String cable;
+	String wifi;
+	String laundry;
+	int date=0;
+	public static int arr[]=new int[25];
+	 void book() throws IOException
+	{
+		int cost=0;
+		String c;
+		BufferedReader c1=new BufferedReader (new InputStreamReader(System.in));
+		do
+		{
+			System.out.println("Booking:");
+			System.out.println("Please choose the services required.");
+			System.out.println("AC/non-AC(AC/nAC)");
+			ac=c1.readLine();
+			cost=0;
+			if(ac.equals("AC"))
+			{
+				cost=cost+1000;
+			}
+			else
+			{
+				cost=cost+750;
+			}
+			System.out.println("Cot(Single/Double)");
+			cot=c1.readLine();
+			if(cot.equals("Single"))
+			{
+				cost=cost+0;
+			}
+			else
+			{
+				cost=cost+350;
+			}
+			System.out.println("With cable connection/without cable connection(C/nC)");
+			cable=c1.readLine();
+			if(cable.equals("C"))
+			{
+				cost=cost+50;
+				cable="cable";
+			}
+			System.out.println("Wi-Fi needed or not(W/nW)");
+			wifi=c1.readLine();
+			if(wifi.equals("W"))
+			{
+				cost=cost+200;
+				wifi="wifi";
+			}
+			System.out.println("Laundry service needed or not(L/nL)");
+			laundry=c1.readLine();
+			if(laundry.equals("L"))
+			{
+				cost=cost+100;
+				laundry="laundry";
+			}
+			System.out.println("Enter the date of booking:");
+			date=Integer.parseInt(c1.readLine());
+			System.out.println("\nThe total charge is Rs." +cost);
+			System.out.println("The services chosen are");
+			System.out.println(cot+" cot "+ac+ " room");
+			System.out.println(cable+" enabled");
+			System.out.println(wifi+" enabled");
+			System.out.println("with " + laundry+ " service");
+			System.out.println("Do you want to proceed?(yes/no)");
+			c=c1.readLine();
+		}
+		while(c.equals("no"));
+		System.out.println("Thank you for booking. Your room number is "+ ++room);
+		arr[croom]=room;
+	
+	}
+}
+
+Register.java
+
+package face;
+public class Register
+{
+	String name;
+	String address;
+	String contactNumber;
+	String email;
+	String proofType;
+	String proofId;
+	public static int regID=0;
+	public static int arr[] =new int[25];
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getContactNumber() {
+		return contactNumber;
+	}
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getProofType() {
+		return proofType;
+	}
+	public void setProofType(String proofType) {
+		this.proofType = proofType;
+	}
+	public String getProofId() {
+		return proofId;
+	}
+	public void setProofId(String proofId) {
+		this.proofId = proofId;
+	}
+	public static int getRegID() {
+		return regID;
+	}
+	public static void setRegID(int regID) {
+		Register.regID = regID;
+	}
+}
+
+Main.java
+
+package face;
+import java.io.IOException;
+import java.util.Scanner;
+public class Main
+{
+	static int regID=0;
+	static int x=0;
+	static int count=0;
+	public static void main(String[] args) throws IOException
+	{
+		char a,b;
+		Scanner sc = new Scanner(System.in);
+		Register reg =new Register();
+		Bookings bk = new Bookings();
+		do
+		{
+			System.out.println("Enter Your Name:");
+			if(x!=0)
+			{
+				sc.nextLine();
+			}
+			reg.setName(sc.nextLine());
+			System.out.println("Enter Your Address:");
+			reg.setAddress(sc.nextLine());
+			System.out.println("Enter Your Number:");
+			reg.setContactNumber(sc.nextLine());
+			System.out.println("Enter Your Email:");
+			reg.setEmail(sc.nextLine());
+			System.out.println("Enter Your Proof Type:");
+			reg.setProofType(sc.nextLine());
+			System.out.println("Enter Your Proof ID:");
+			reg.setProofId(sc.nextLine());
+			System.out.println("Thanks for registering. Your register ID is "+ ++regID);
+			Register.arr[count]=regID;
+			System.out.println("Do you want to book a room?(y/n)");
+			a=sc.next().charAt(0);
+			if(a=='y')
+				bk.book();
+			else
+				System.out.println("Thank you");
+			System.out.println("Do you want to continue registration?(y/n)");
+			b=sc.next().charAt(0);
+			x++;
+		}
+		while(b=='y');
+		ViewBookings.view();
+		sc.close();
+	}
+}
+
+ViewBookings.java
+
+package face;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class ViewBookings
+{
+	static int v,u;
+	int t=0;
+	static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Bookings B=new Bookings();
+	public static void view() throws NumberFormatException, IOException
+	{
+		System.out.println("Enter the Start date");
+		v=Integer.parseInt(br.readLine());
+		System.out.println("Enter the end date");
+		u=Integer.parseInt(br.readLine());
+		System.out.println("The bookings made from "+v+" "+"to "+u+" "+"are");
+		System.out.println("Room Number Customer ID");
+		for(int i=0;i<Register.arr.length;i++)
+		{
+			if(Bookings.arr[i]>=v && Bookings.arr[i]<=u)
+			{
+				System.out.println(Bookings.arr[i]+"     "+Register.arr[i]);
+
+			}
+		}
+	}
+}
+
+Output:
+
+Enter Your Name:
+Shreyas K P
+Enter Your Address:
+Kollam
+Enter Your Number:
+8105775400
+Enter Your Email:
+kpshreyas1@gmail.com
+Enter Your Proof Type:
+Aadhaar
+Enter Your Proof ID:
+37627467468
+Thanks for registering. Your register ID is 1
+Do you want to book a room?(y/n)
+y
+Booking:
+Please choose the services required.
+AC/non-AC(AC/nAC)
+AC
+Cot(Single/Double)
+Single
+With cable connection/without cable connection(C/nC)
+C
+Wi-Fi needed or not(W/nW)
+W
+Laundry service needed or not(L/nL)
+L
+Enter the date of booking:
+3
+
+The total charge is Rs.1350
+The services chosen are
+Single cot AC room
+cable enabled
+wifi enabled
+with laundry service
+Do you want to proceed?(yes/no)
+yes
+Thank you for booking. Your room number is 1
+Do you want to continue registration?(y/n)
+y
+Enter Your Name:
+Vaishnavi
+Enter Your Address:
+kayankulam
+Enter Your Number:
+7464684949
+Enter Your Email:
+vaishnavi@gmail.com
+Enter Your Proof Type:
+Voter id
+Enter Your Proof ID:
+462474467404
+Thanks for registering. Your register ID is 2
+Do you want to book a room?(y/n)
+y
+Booking:
+Please choose the services required.
+AC/non-AC(AC/nAC)
+nAC
+Cot(Single/Double)
+Single
+With cable connection/without cable connection(C/nC)
+C
+Wi-Fi needed or not(W/nW)
+W
+Laundry service needed or not(L/nL)
+nL
+Enter the date of booking:
+2
+
+The total charge is Rs.1000
+The services chosen are
+Single cot nAC room
+cable enabled
+wifi enabled
+with nL service
+Do you want to proceed?(yes/no)
+yes
+Thank you for booking. Your room number is 2
+Do you want to continue registration?(y/n)
+n
+Enter the Start date
+1
+Enter the end date
+5
+The bookings made from 1 to 5 are
+Room Number Customer ID
+1		1
+2		2
